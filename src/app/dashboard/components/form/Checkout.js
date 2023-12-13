@@ -38,7 +38,18 @@ export default function Checkout() {
   const [coverLetter, setCoverLetter] = React.useState("");
   const { data, ProjectDescription } = React.useContext(AppContext);
 
+  const paragraphs = coverLetter.split("\n\n");
+
+  // Create React elements for each paragraph
+  const formattedString = paragraphs.map((paragraph, index) => (
+    <>
+      <p key={index}>{paragraph}</p>
+      <br />
+    </>
+  ));
+
   const handleNext = () => {
+    console.log(data);
     console.log("next");
     setActiveStep(activeStep + 1);
   };
@@ -99,7 +110,7 @@ export default function Checkout() {
                     </Typography>
                   </>
                 ) : (
-                  <p>{coverLetter}</p>
+                  <div>{formattedString}</div>
                 )}
               </Box>
             </React.Fragment>

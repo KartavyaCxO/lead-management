@@ -5,7 +5,7 @@ export async function middleware(request) {
   const clientid = process.env.SELF_CLIENT_ID ?? "";
   const clientsecret = process.env.SELF_CLIENT_SECRET ?? "";
 
-  if (request.nextUrl.pathname.startsWith("/zohonewauth")) {
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
     const code = request.nextUrl.searchParams.get("code");
     if (!code) {
       return NextResponse.next();
@@ -20,7 +20,7 @@ export async function middleware(request) {
         grant_type: "authorization_code",
         client_id: clientid,
         client_secret: clientsecret,
-        redirect_uri: "http://localhost:3000/zohonewauth",
+        redirect_uri: "http://localhost:3000/dashboard",
         code: code,
       }),
     });
@@ -56,7 +56,7 @@ export async function middleware(request) {
       !request.cookies.get("refresh_token")?.value
     ) {
       return NextResponse.redirect(
-        "https://accounts.zoho.com/oauth/v2/auth?scope=ZohoProjects.portals.READ,ZohoProjects.projects.ALL,ZohoProjects.tasks.READ&client_id=1000.X36NDOLRIIGO3CFYUQ8Q97PPFEI9RZ&response_type=code&access_type=offline&redirect_uri=http://localhost:3000/zohonewauth&prompt=consent"
+        "https://accounts.zoho.com/oauth/v2/auth?scope=ZohoCRM.settings.related_lists.ALL,ZohoCRM.settings.fields.ALL,ZohoCRM.modules.ALL,ZohoCRM.settings.fields.ALL&client_id=1000.X36NDOLRIIGO3CFYUQ8Q97PPFEI9RZ&response_type=code&access_type=offline&redirect_uri=http://localhost:3000/dashboard&prompt=consent"
       );
     }
     if (
@@ -75,7 +75,7 @@ export async function middleware(request) {
           grant_type: "refresh_token",
           client_id: clientid,
           client_secret: clientsecret,
-          redirect_uri: "http://localhost:3000/zohonewauth",
+          redirect_uri: "http://localhost:3000/dashboard",
           refresh_token: parsed_refresh_token,
         }),
       });

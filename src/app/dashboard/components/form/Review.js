@@ -30,7 +30,6 @@ export default function Review() {
   const [countries, setCountries] = React.useState([]);
   const { data, setProjectDescription, ProjectDescription } =
     React.useContext(AppContext);
-  console.log(ProjectDescription);
   const handleChange = (event) => {
     setLocation(event.target.value);
     data[0].Location = event.target.value;
@@ -79,6 +78,7 @@ export default function Review() {
             label="Upwork Project Title (choose NA if any other lead source)"
             fullWidth
             onChange={(e) => {
+              console.log(data[0]);
               data[0].Project_Title = e.target.value;
               data[0].Name = e.target.value;
             }}

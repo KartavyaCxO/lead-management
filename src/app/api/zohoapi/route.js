@@ -3,7 +3,7 @@ import { NextRequest } from "next/server";
 export async function POST(request) {
   try {
     const req = await request.json();
-    const access = request.cookies.get("access_token").value;
+    const access = request.cookies.get("auth_token").value;
     const parsed_access = await JSON.parse(access);
     const resData = await fetch("https://www.zohoapis.in/crm/v2/Upwork_bids", {
       method: "POST",
@@ -14,10 +14,10 @@ export async function POST(request) {
       body: JSON.stringify(req),
     });
     const data = await resData.json();
+    console.log(data);
     return NextResponse.json({ message: data, status: 200 });
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    console.log(error);
+    return NextResponse.json({ error: error, status: 500 });
   }
 }

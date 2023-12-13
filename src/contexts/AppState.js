@@ -5,12 +5,13 @@ import AppContext from "./AppContext";
 const AppState = ({ children }) => {
   const [user, setUser] = useState(null);
   const [ProjectDescription, setProjectDescription] = useState("");
+
   console.log(user);
 
   const data = [
     {
       api_name: "Upwork_bid",
-      Email: user ? user.email : "",
+      Email: user ? user.email : "maneet.singh@yourcxo.online",
       Project_Title: "",
       Source: "",
       Bid_Type: "",
@@ -20,7 +21,7 @@ const AppState = ({ children }) => {
       Bid_Budget: "",
       Ticket_Type: "",
       Comments: "",
-      days_before_job_posted: "",
+      days_before_job_posted: "0",
       Bid_Quoted: "",
       Bid_Payment_Terms: "",
       connects_spent: "",
@@ -29,13 +30,19 @@ const AppState = ({ children }) => {
       Day: "",
       Boosted_or_not: "",
       Bid_Type: "",
-      Location: "",
+      Location: "USA",
     },
   ];
 
   return (
     <AppContext.Provider
-      value={{ user, setUser, data, setProjectDescription, ProjectDescription }}
+      value={{
+        user,
+        setUser,
+        data,
+        setProjectDescription,
+        ProjectDescription,
+      }}
     >
       {children}
     </AppContext.Provider>
