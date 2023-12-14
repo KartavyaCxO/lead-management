@@ -26,6 +26,9 @@ export async function middleware(request) {
     });
 
     const data = await resData.json();
+    console.log("====================================");
+    console.log(data);
+    console.log("====================================");
     const auth_token = JSON.stringify(data.access_token);
     const refresh_token = JSON.stringify(data.refresh_token);
     console.log(JSON.stringify(data));
